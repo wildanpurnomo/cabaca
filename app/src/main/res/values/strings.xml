@@ -6,4 +6,12 @@
     <string name="main_page">Main</string>
     <string name="new_books">Buku Terbaru</string>
     <string name="genre">Cari Genre</string>
+    <string name="book_detail">Detail Buku</string>
+    <string name="writer_detail">Detail Penulis</string>
+    <string name="image_book">Image Book</string>
+    <string name="book_detail_title">Judul</string>
+    <string name="book_detail_genre">Genre</string>
+    <string name="book_detail_author">Penulis</string>
+    <string name="to_writer_detail">Klik disini untuk informasi penulis.</string>
+    <string name="book_detail_desc">SInopsis</string>
 </resources>

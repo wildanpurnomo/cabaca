@@ -17,4 +17,11 @@ class BookRepository : BaseRemoteRepository() {
             errorMessage = "Error get book by genre"
         )
     }
+
+    suspend fun getBookDetailById(bookId: Int): BookDetailAPIResponse? {
+        return safeAPICall(
+            call = { APIMain.services.getBookDetailById(bookId) },
+            errorMessage = "Error get book detail"
+        )
+    }
 }

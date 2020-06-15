@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wildanpurnomo.cabaca.R
 import com.wildanpurnomo.cabaca.data.book.BookModel
 import com.wildanpurnomo.cabaca.data.book.BookViewModel
 import com.wildanpurnomo.cabaca.data.genre.GenreViewModel
+import com.wildanpurnomo.cabaca.ui.MainFragmentDirections
 import com.wildanpurnomo.cabaca.ui.bookList.BookListRVAdapter
 import kotlinx.android.synthetic.main.fragment_genre.*
 
@@ -65,5 +67,7 @@ class GenreFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
     }
 
     override fun onItemClick(data: BookModel) {
+        val action = MainFragmentDirections.actionMainPageToBookDetailPage(data.id ?: -1)
+        findNavController().navigate(action)
     }
 }

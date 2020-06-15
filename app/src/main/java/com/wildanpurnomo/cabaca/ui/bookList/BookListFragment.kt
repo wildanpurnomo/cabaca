@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wildanpurnomo.cabaca.R
 import com.wildanpurnomo.cabaca.data.book.BookModel
 import com.wildanpurnomo.cabaca.data.book.BookViewModel
+import com.wildanpurnomo.cabaca.ui.MainFragmentDirections
 import kotlinx.android.synthetic.main.fragment_book_list.*
 
 class BookListFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
@@ -64,5 +66,7 @@ class BookListFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
     }
 
     override fun onItemClick(data: BookModel) {
+        val action = MainFragmentDirections.actionMainPageToBookDetailPage(data.id ?: -1)
+        findNavController().navigate(action)
     }
 }

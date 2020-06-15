@@ -2,12 +2,13 @@ package com.wildanpurnomo.cabaca.data.book
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.wildanpurnomo.cabaca.data.genre.GenreModel
 import com.wildanpurnomo.cabaca.data.writer.WriterByWriterId
 
 data class BookModel(
     @SerializedName("id")
     @Expose
-    val id: String? = null,
+    val id: Int? = null,
 
     @SerializedName("title")
     @Expose
@@ -55,5 +56,13 @@ data class BookModel(
 
     @SerializedName("chapter_count")
     @Expose
-    val chapterCount: Int? = null
+    val chapterCount: Int? = null,
+
+    @SerializedName("genres")
+    @Expose
+    val genre: ArrayList<GenreModel>? = null,
+
+    @SerializedName("desc")
+    @Expose
+    val synopsis: String? = null
 )

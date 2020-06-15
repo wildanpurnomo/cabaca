@@ -9,6 +9,47 @@
         android:id="@+id/mainPage"
         android:name="com.wildanpurnomo.cabaca.ui.MainFragment"
         android:label="@string/main_page"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainPage_to_bookDetailPage"
+            app:destination="@id/bookDetailPage">
+
+            <argument
+                android:name="bookDetailArgs"
+                app:argType="integer" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookDetailPage"
+        android:name="com.wildanpurnomo.cabaca.ui.bookDetail.BookDetailFragment"
+        android:label="@string/book_detail"
+        tools:layout="@layout/fragment_book_detail">
+
+        <argument
+            android:name="bookDetailArgs"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_bookDetailPage_to_writerDetailPage"
+            app:destination="@id/writerDetailPage">
+
+            <argument
+                android:name="writerDetailArgs"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/writerDetailPage"
+        android:name="com.wildanpurnomo.cabaca.ui.writerDetail.WriterDetailFragment"
+        android:label="@string/writer_detail"
+        tools:layout="@layout/fragment_writer_detail">
+
+        <argument
+            android:name="writerDetailArgs"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>
