@@ -19,4 +19,5 @@
     <string name="writer_detail_email">Email</string>
     <string name="writer_detail_phone">Telepon</string>
     <string name="writer_detail_desc">Deskripsi</string>
+    <string name="click_for_detail">Klik untuk melihat detail</string>
 </resources>

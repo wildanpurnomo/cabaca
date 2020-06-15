@@ -27,6 +27,11 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextViewNormalSmall">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="TextViewNormalClick">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">12sp</item>

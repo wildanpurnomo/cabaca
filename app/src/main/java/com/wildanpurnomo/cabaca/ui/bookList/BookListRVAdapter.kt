@@ -54,7 +54,9 @@ class BookListRVAdapter :
         ) {
             with(itemView) {
                 item_row_book_title.text = bookModel.title
-                item_row_book_author.text = bookModel.writerByWriterId?.userByUserId?.name
+                item_row_book_author.text =
+                    String.format("Author: %s", bookModel.writerByWriterId?.userByUserId?.name)
+
 
                 val coverUrl = bookModel.coverUrl?.replace("%2F", "/").toString()
                 val imageURL =
