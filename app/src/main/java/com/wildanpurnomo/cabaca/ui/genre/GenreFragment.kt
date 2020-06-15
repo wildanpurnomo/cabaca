@@ -1,4 +1,4 @@
-package com.wildanpurnomo.cabaca.ui
+package com.wildanpurnomo.cabaca.ui.genre
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
