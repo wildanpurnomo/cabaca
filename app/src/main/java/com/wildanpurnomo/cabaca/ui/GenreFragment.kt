@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.wildanpurnomo.cabaca.R
 
-class FavoriteFragment : Fragment() {
+class GenreFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false)
+        return inflater.inflate(R.layout.fragment_genre, container, false)
     }
+
 }
