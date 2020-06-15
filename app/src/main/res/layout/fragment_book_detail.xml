@@ -138,13 +138,6 @@
                 app:constraint_referenced_ids="fragBookDetailToWriterDetail,fragBookDetailImg"
                 tools:layout_editor_absoluteY="214dp" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.66" />
-
             <TextView
                 android:id="@+id/fragBookDetailDesc"
                 style="@style/TextViewTitle"

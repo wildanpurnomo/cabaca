@@ -14,4 +14,9 @@
     <string name="book_detail_author">Penulis</string>
     <string name="to_writer_detail">Klik disini untuk informasi penulis.</string>
     <string name="book_detail_desc">SInopsis</string>
+    <string name="writer_image">Writer Image</string>
+    <string name="writer_detail_name">Nama</string>
+    <string name="writer_detail_email">Email</string>
+    <string name="writer_detail_phone">Telepon</string>
+    <string name="writer_detail_desc">Deskripsi</string>
 </resources>

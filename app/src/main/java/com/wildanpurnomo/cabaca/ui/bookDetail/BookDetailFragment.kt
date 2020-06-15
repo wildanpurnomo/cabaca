@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.wildanpurnomo.cabaca.R
 import com.wildanpurnomo.cabaca.data.book.BookViewModel
+import com.wildanpurnomo.cabaca.ui.MainFragmentDirections
 import kotlinx.android.synthetic.main.fragment_book_detail.*
 
 
@@ -37,6 +39,14 @@ class BookDetailFragment : Fragment() {
 
         mBookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
         mBookDetailViewModel = ViewModelProvider(this).get(BookDetailViewModel::class.java)
+
+        fragBookDetailToWriterDetail.setOnClickListener {
+            val userId = mBookViewModel.getWriterIdFromDetail()
+            val action =
+                BookDetailFragmentDirections.actionBookDetailPageToWriterDetailPage(userId)
+            findNavController().navigate(action)
+        }
+
         mBookViewModel.setBookDetail(args.bookDetailArgs)
 
         mBookViewModel.getBookDetail().observe(viewLifecycleOwner, Observer {

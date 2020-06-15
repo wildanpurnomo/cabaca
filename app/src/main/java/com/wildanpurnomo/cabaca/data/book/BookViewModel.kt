@@ -100,6 +100,10 @@ class BookViewModel : ViewModel() {
         return bookDetail
     }
 
+    fun getWriterIdFromDetail(): Int {
+        return bookDetail.value?.writerByWriterId?.userId ?: -1
+    }
+
     init {
         setLatestBook()
     }

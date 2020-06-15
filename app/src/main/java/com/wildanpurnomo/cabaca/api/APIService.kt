@@ -3,6 +3,7 @@ package com.wildanpurnomo.cabaca.api
 import com.wildanpurnomo.cabaca.data.book.BookAPIResponse
 import com.wildanpurnomo.cabaca.data.book.BookDetailAPIResponse
 import com.wildanpurnomo.cabaca.data.genre.GenreAPIResponse
+import com.wildanpurnomo.cabaca.data.writer.WriterAPIResponse
 import com.wildanpurnomo.cabaca.utils.Constants.API.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -33,4 +34,10 @@ interface APIService {
     suspend fun getAllGenre(
         @Header("x-dreamfactory-api-key") apiKey: String = API_KEY
     ): Response<GenreAPIResponse>
+
+    @GET("writer/detail/{user_id}")
+    suspend fun getWriterDetailByUserId(
+        @Path("user_id") userId: Int? = null,
+        @Header("x-dreamfactory-api-key") apiKey: String = API_KEY
+    ): Response<WriterAPIResponse>
 }

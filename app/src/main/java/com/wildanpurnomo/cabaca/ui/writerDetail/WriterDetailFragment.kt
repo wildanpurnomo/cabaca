@@ -5,30 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.wildanpurnomo.cabaca.R
+import com.wildanpurnomo.cabaca.data.writer.WriterViewModel
+import kotlinx.android.synthetic.main.fragment_book_detail.*
+import kotlinx.android.synthetic.main.fragment_genre.*
+import kotlinx.android.synthetic.main.fragment_writer_detail.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [WriterDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WriterDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val args: WriterDetailFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var mWriterViewModel: WriterViewModel
+
+    private lateinit var mWriterDetailViewModel: WriterDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +31,39 @@ class WriterDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_writer_detail, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WriterDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WriterDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mWriterViewModel = ViewModelProvider(this).get(WriterViewModel::class.java)
+        mWriterDetailViewModel = ViewModelProvider(this).get(WriterDetailViewModel::class.java)
+
+        mWriterViewModel.setWriterDetail(args.writerDetailArgs)
+
+        mWriterViewModel.getWriterDetail().observe(viewLifecycleOwner, Observer {
+            // Set Photo
+            val options: RequestOptions = RequestOptions()
+                .fitCenter()
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round)
+            val imageURL = mWriterDetailViewModel.getPhotoUrl(it.photoURL.toString())
+            Glide.with(this).load(imageURL).apply(options)
+                .into(fragWriterDetailImg)
+
+            // Set name
+            fragWriterDetailNameValue.text = it.name.toString()
+
+            // Set email
+            fragWriterDetailEmailValue.text = it.email.toString()
+
+            // Set Phone
+            fragWriterDetailPhoneValue.text = it.phone ?: "-"
+
+            // Set Desc
+            fragWriterDetailDescValue.text = it.desc.toString()
+
+            fragWriterDetailContent.visibility = View.VISIBLE
+            fragWriterDetailProgressBar.visibility = View.GONE
+        })
     }
+
 }
