@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_row_book.view.*
 class BookListRVAdapter :
     RecyclerView.Adapter<BookListRVAdapter.ViewHolder>() {
 
-    private val dataset: ArrayList<BookModel> = ArrayList()
+    private var dataset: ArrayList<BookModel> = ArrayList()
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -44,8 +44,7 @@ class BookListRVAdapter :
     }
 
     fun updateDataset(dataset: ArrayList<BookModel>) {
-        if (!this.dataset.isNullOrEmpty()) dataset.clear()
-        this.dataset.addAll(dataset)
+        this.dataset = dataset
         notifyDataSetChanged()
     }
 

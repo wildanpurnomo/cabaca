@@ -56,6 +56,29 @@ class BookViewModel : ViewModel() {
         return latestBook
     }
 
+    private val bookByGenre: MutableLiveData<ArrayList<BookModel>> by lazy {
+        MutableLiveData<ArrayList<BookModel>>()
+    }
+
+    fun getBookByGenre(): LiveData<ArrayList<BookModel>> {
+        return bookByGenre
+    }
+
+    fun setBookByGenre(genreId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = mBookRepository.getBookByGenreId(genreId)
+                if (response != null) {
+                    if (!response.responseData.isNullOrEmpty()) {
+                        bookByGenre.postValue(response.responseData)
+                    }
+                }
+            } catch (e: Exception) {
+                Log.wtf("Error book by genre", e.message.toString())
+            }
+        }
+    }
+
     init {
         setLatestBook()
     }

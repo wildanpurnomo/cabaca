@@ -9,10 +9,13 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.wildanpurnomo.cabaca.R
 import com.wildanpurnomo.cabaca.data.book.BookViewModel
+import com.wildanpurnomo.cabaca.data.genre.GenreViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBookViewModel: BookViewModel
+
+    private lateinit var mGenreVIewModel: GenreViewModel
 
     private lateinit var mAppBarConfiguration: AppBarConfiguration
 
@@ -23,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mainToolbar)
 
         mBookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
+        mGenreVIewModel = ViewModelProvider(this).get(GenreViewModel::class.java)
 
         val navController = findNavController(R.id.nav_host_fragment)
         mAppBarConfiguration = AppBarConfiguration(navController.graph)

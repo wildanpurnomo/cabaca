@@ -45,6 +45,7 @@ class BookListFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
             fragBookListProgressBar.visibility = View.GONE
             fragBookListRV.visibility = View.VISIBLE
 
+            fragBookListRefresh.isRefreshing = false
             fragBookListRefresh.isEnabled = true
             fragBookListRefresh.setOnRefreshListener {
                 mBookViewModel.setLatestBook()
@@ -58,6 +59,7 @@ class BookListFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
         mBookViewModel.getIsError().observe(viewLifecycleOwner, Observer {
             fragBookListTVError.isVisible = it
             fragBookListProgressBar.visibility = View.GONE
+            fragBookListRefresh.isRefreshing = false
         })
     }
 
