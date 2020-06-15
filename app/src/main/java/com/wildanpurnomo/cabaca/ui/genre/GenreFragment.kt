@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -25,6 +27,8 @@ class GenreFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
 
     private lateinit var mBookListAdapter: BookListRVAdapter
 
+    private lateinit var mLayoutAnimationController: LayoutAnimationController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBookListAdapter = BookListRVAdapter()
@@ -42,8 +46,12 @@ class GenreFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mLayoutAnimationController =
+            AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_animation_fall_down)
+
         fragGenreRV.adapter = mBookListAdapter
         fragGenreRV.layoutManager = LinearLayoutManager(requireContext())
+        fragGenreRV.layoutAnimation = mLayoutAnimationController
 
         mGenreViewModel.getGenreNameList().observe(viewLifecycleOwner, Observer {
             val adapter = ArrayAdapter(
@@ -62,6 +70,7 @@ class GenreFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
         mBookViewModel.getBookByGenre().observe(viewLifecycleOwner, Observer {
             mBookListAdapter.updateDataset(it)
             fragGenreRV.visibility = View.VISIBLE
+            fragGenreRV.scheduleLayoutAnimation()
             fragGenreProgressBar.visibility = View.GONE
         })
     }
