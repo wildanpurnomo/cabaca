@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -20,7 +21,8 @@ import com.wildanpurnomo.cabaca.ui.MainFragmentDirections
 import com.wildanpurnomo.cabaca.ui.bookList.BookListRVAdapter
 import kotlinx.android.synthetic.main.fragment_genre.*
 
-class GenreFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
+class GenreFragment : Fragment(), BookListRVAdapter.OnItemClickCallback,
+    AdapterView.OnItemSelectedListener {
     private val mGenreViewModel: GenreViewModel by activityViewModels()
 
     private val mBookViewModel: BookViewModel by activityViewModels()
@@ -53,18 +55,14 @@ class GenreFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
         fragGenreRV.layoutManager = LinearLayoutManager(requireContext())
         fragGenreRV.layoutAnimation = mLayoutAnimationController
 
+        fragGenreSpinner.setOnItemSelectedListener(this)
+
         mGenreViewModel.getGenreNameList().observe(viewLifecycleOwner, Observer {
             val adapter = ArrayAdapter(
                 requireContext(), android.R.layout.simple_spinner_item, it
             )
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             fragGenreSpinner.setAdapter(adapter)
-            fragGenreSpinner.setOnItemSelectedListener { _, position, _, _ ->
-                if (position != 0) {
-                    val genreId = mGenreViewModel.getGenreId(position)
-                    mBookViewModel.setBookByGenre(genreId ?: -1)
-                    fragGenreProgressBar.visibility = View.VISIBLE
-                }
-            }
         })
 
         mBookViewModel.getBookByGenre().observe(viewLifecycleOwner, Observer {
@@ -78,5 +76,16 @@ class GenreFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
     override fun onItemClick(data: BookModel) {
         val action = MainFragmentDirections.actionMainPageToBookDetailPage(data.id ?: -1)
         findNavController().navigate(action)
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        if (p2 != 0) {
+            val genreId = mGenreViewModel.getGenreId(p2)
+            mBookViewModel.setBookByGenre(genreId ?: -1)
+            fragGenreProgressBar.visibility = View.VISIBLE
+        }
     }
 }

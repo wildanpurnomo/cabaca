@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.genre.GenreFragment">
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
+    <Spinner
         android:id="@+id/fragGenreSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
