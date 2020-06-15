@@ -71,6 +71,7 @@ class BookListFragment : Fragment(), BookListRVAdapter.OnItemClickCallback {
             fragBookListTVError.isVisible = it
             fragBookListProgressBar.visibility = View.GONE
             fragBookListRefresh.isRefreshing = false
+            fragBookListRefresh.isEnabled = true
         })
     }
 
